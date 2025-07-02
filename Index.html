@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AstroMate AI</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0b0c2a;
+      color: white;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #ffd700;
+    }
+    section {
+      margin: 30px auto;
+      max-width: 600px;
+      background: #1a1c3b;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #222;
+    }
+    img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .info {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ AstroMate AI ✨</h1>
+  <p>Explore space with NASA APIs!</p>  <section>
+    <h2>NASA Astronomy Picture of the Day</h2>
+    <img id="apodImage" src="" alt="Astronomy Picture of the Day" />
+    <p class="info" id="apodTitle"></p>
+    <p class="info" id="apodDesc"></p>
+  </section>  <section>
+    <h2>Where is the ISS right now?</h2>
+    <p class="info" id="issLocation">Loading...</p>
+  </section>  <script>
+    // APOD (Astronomy Picture of the Day)
+    fetch("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("apodImage").src = data.url;
+        document.getElementById("apodTitle").textContent = data.title;
+        document.getElementById("apodDesc").textContent = data.explanation;
+      });
+
+    // ISS Location
+    fetch("https://api.wheretheiss.at/v1/satellites/25544")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("issLocation").textContent = `Latitude: ${data.latitude.toFixed(2)}, Longitude: ${data.longitude.toFixed(2)}`;
+      });
+  </script></body>
+</html
